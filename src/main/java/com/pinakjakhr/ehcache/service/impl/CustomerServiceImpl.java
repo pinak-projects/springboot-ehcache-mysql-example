@@ -29,33 +29,38 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	@Caching(evict = @CacheEvict(allEntries = true), put = @CachePut)
 	public Customer saveCustomer(Customer customer) {
+		log.info("saveCustomer called for creating a customer...");
 		return customerRepository.save(customer);
 	}
-	
+
 	@Cacheable
 	@Override
 	public Customer fetchCustomerById(long customerId) {
+		log.info("fetchCustomerById called for fetching a customer...");
 		return customerRepository.findById(customerId).orElseThrow(() -> new RuntimeException("Customer not found."));
 	}
 
 	@Cacheable
 	@Override
 	public List<Customer> fetchCustomersList() {
+		log.info("fetchCustomersList called for fetching all customers...");
 		simulateSlowService();
 		return Optional.ofNullable(customerRepository.findAll()).orElse(new ArrayList<>());
 	}
 
 	private void simulateSlowService() {
 		try {
+			log.info("simulateSlowService called...");
 			Thread.sleep(3000L);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Caching(evict = @CacheEvict(allEntries = true))
 	@Override
 	public void deleteCustomer(Customer customer) {
+		log.info("deleteCustomer called for deleting a customer...");
 		customerRepository.delete(customer);
 	}
 
