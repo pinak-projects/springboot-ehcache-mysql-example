@@ -23,6 +23,15 @@ import lombok.extern.slf4j.Slf4j;
 @CacheConfig(cacheNames = "customer")
 public class CustomerServiceImpl implements CustomerService {
 
+	/*
+	 *  @CacheConfig - tells Spring where to store cache for this class
+	 * 	@CacheEvict - will clear the cache when we delete or update any customer info from the database.
+	 *  @Cacheable - Each time the method is invoked, it is checked whether the method has been already invoked for 
+	 *   		     the given arguments. If no value is found in the cache, the target method will be invoked and 
+	 *               the returned value will be stored in the associated cache.
+	 *  @CachePut -  always lets the method execute. It is used to update the cache with the result of the method execution
+	 */
+	
 	@Autowired
 	private CustomerRepository customerRepository;
 

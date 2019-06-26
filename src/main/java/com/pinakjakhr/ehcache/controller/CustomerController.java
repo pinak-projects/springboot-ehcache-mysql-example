@@ -36,8 +36,8 @@ public class CustomerController {
 	}
 
 	/** API to edit an existing customer */
-	@PutMapping(value = "/{userId}")
-	public ResponseEntity<?> updateCustomer(@PathVariable long customerId, @Valid @RequestBody Customer customer) {
+	@PutMapping(value = "/{customerId}")
+	public ResponseEntity<?> updateCustomer(@PathVariable("customerId") long customerId, @Valid @RequestBody Customer customer) {
 		customerService.fetchCustomerById(customerId);
 		customer.setCustomerId(customerId);
 		customerService.saveCustomer(customer);
@@ -52,16 +52,16 @@ public class CustomerController {
 	}
 
 	/** API to fetch single customer details */
-	@GetMapping(value = "/{userId}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/{customerId}", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(value = HttpStatus.OK)
-	public Customer getCustomerDetails(@PathVariable long customerId) {
+	public Customer getCustomerDetails(@PathVariable("customerId") long customerId) {
 		return customerService.fetchCustomerById(customerId);
 	}
 
 	/** API to delete a customer */
-	@DeleteMapping(value = "/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
+	@DeleteMapping(value = "/{customerId}", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(value = HttpStatus.OK)
-	public ResponseEntity<String> deleteCustomer(@PathVariable long customerId) {
+	public ResponseEntity<String> deleteCustomer(@PathVariable("customerId") long customerId) {
 		Customer customer = customerService.fetchCustomerById(customerId);
 		customerService.deleteCustomer(customer);
 		return ResponseEntity.ok("Customer deleted successfully.");

@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ResourceLoader;
 
+// @EnableCaching enables Spring's annotation-driven cache management capability
 @EnableCaching
 @Configuration
 public class EhCacheConfig {

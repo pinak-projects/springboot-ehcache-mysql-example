@@ -35,7 +35,7 @@
                                              (specified as LFU)
     -->
         
-    <cache name="users"
+    <cache name="customer"
        maxElementsInMemory="10000"
            eternal="false"
            overflowToDisk="false"
